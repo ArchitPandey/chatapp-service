@@ -10,6 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import java.io.IOException;
+import java.time.Instant;
 import java.util.Objects;
 
 import static com.app.chat.constants.AppConstants.SYSTEM;
@@ -44,6 +45,7 @@ public class ChatMessageHandler extends TextWebSocketHandler {
                     .from(SYSTEM)
                     .to(chatMessage.getFrom())
                     .message(chatMessage.getTo()+" is offline!")
+                    .timestamp(Instant.now())
                     .build();
 
             String reply = objectMapper.writeValueAsString(offline);
